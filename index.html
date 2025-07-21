@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX GET Local Test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>AJAX GET Test</h1>
+    <button id="loadContent">Load Content</button>
+    <div id="content">
+        </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#loadContent').on('click', function() {
+                $.ajax({
+                    url: 'file:///C:/Users/ITIEL/Documents/HTMLProjects/ajax/data.html', // Path to the HTML file you want to load
+                    type: 'GET',
+                    dataType: 'html', // Expecting HTML content back
+                    success: function(response) {
+                        // On success, 'response' will contain the HTML content of 'data.html'
+                        $('#content').html(response);
+                        console.log('Content loaded successfully!');
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle any errors during the AJAX request
+                        console.error('AJAX Error:');
+                        console.error('Status:', status);
+                        console.error('Error:', error);
+                        $('#content').html('<p style="color: red;">Failed to load content.</p>');
+                    },
+                    complete: function() {
+                        console.log('AJAX request completed.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
